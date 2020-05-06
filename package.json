@@ -6,20 +6,32 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
+    "@types/classnames": "^2.2.10",
+    "@types/gsap": "^1.20.2",
     "@types/jest": "^24.9.1",
     "@types/node": "^12.12.37",
     "@types/react": "^16.9.34",
     "@types/react-dom": "^16.9.7",
+    "@types/react-router-dom": "^5.1.5",
+    "@types/scrollreveal": "0.0.6",
+    "classnames": "^2.2.6",
+    "gsap": "^3.2.6",
+    "node-sass": "^4.14.1",
+    "normalize.css": "^8.0.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.1",
+    "scrollreveal": "^4.0.6",
     "typescript": "^3.7.5"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "eslint --ext .ts,.tsx,.js .",
+    "lint:fix": "eslint --ext .ts,.tsx,.js --fix ."
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -35,5 +47,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "husky": "^4.2.5"
   }
 }
