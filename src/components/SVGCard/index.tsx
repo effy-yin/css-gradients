@@ -1,13 +1,20 @@
 import React, { useRef } from 'react';
+import pathData from './pathData.json';
 import './index.scss';
 import gsap from 'gsap';
 import { GradientInfo } from '../../App';
 
-const SVGCard = ({ info }: { info: GradientInfo }) => {
-  const initPath =
-    'm 0,0 0,171.14385 c 24.580441,15.47138 55.897012,24.75772 90,24.75772 34.10299,0 65.41956,-9.28634 90,-24.75772 L 180,0 0,0 z';
-  const hoverPath =
-    'm 0, 0 0, 47.7775 c 24.580441, 3.12569 55.897012, -8.199417 90, -8.199417 34.10299, 0 65.41956, 11.325107 90, 8.199417 L 180, 0 z';
+const SVGCard = ({
+  info,
+  onCardClick,
+  type,
+}: {
+  info: GradientInfo;
+  onCardClick: Function;
+  type?: string;
+}) => {
+  const pathType: string = type ? type : 'arc';
+  const { initPath, hoverPath } = (pathData as any)[pathType];
 
   const pathRef = useRef<SVGPathElement>(null);
   const handleMouseEnter: React.MouseEventHandler<HTMLSpanElement> = () => {
@@ -38,7 +45,7 @@ const SVGCard = ({ info }: { info: GradientInfo }) => {
   };
 
   const bgRef = useRef<HTMLSpanElement>(null);
-  const handleClick: React.MouseEventHandler<HTMLButtonElement> = () => {
+  const handleClick: React.MouseEventHandler<HTMLElement> = () => {
     const BgEle: HTMLDivElement | null = document.querySelector(
       '.main-container'
     );
@@ -63,12 +70,22 @@ const SVGCard = ({ info }: { info: GradientInfo }) => {
         </svg>
         <figcaption>
           <h2>{info.name}</h2>
-          <br />
           <p>
             {info.gradient[0].color}->
             {info.gradient[info.gradient.length - 1].color}
           </p>
-          <button onClick={handleClick}>Click me</button>
+          <button onClick={(e) => onCardClick(e.clientX, e.clientY)}>
+            Click me
+          </button>
+          <div className="label" onClick={handleClick}>
+            <em style={{ background: info.gradient[0].color }}></em>
+            click to change bg
+            <em
+              style={{
+                background: info.gradient[info.gradient.length - 1].color,
+              }}
+            ></em>
+          </div>
         </figcaption>
       </figure>
     </span>

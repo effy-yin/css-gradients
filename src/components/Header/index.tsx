@@ -13,7 +13,13 @@ export default function Header() {
         </a>
         <div className="nav__buttons_box">
           <Link className="button button--blank nav__button" to="/svg-card1">
-            SVG card
+            SVG card1
+          </Link>
+          <Link className="button button--blank nav__button" to="/svg-card2">
+            SVG card2
+          </Link>
+          <Link className="button button--blank nav__button" to="/svg-card3">
+            SVG card3
           </Link>
           <Link className="button button--blank nav__button" to="/gra-card">
             default card

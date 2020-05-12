@@ -31,10 +31,20 @@ const App = () => {
   let location = useLocation();
 
   useEffect(() => {
-    const htmlClass = location.pathname.substr(1).replace(/[0-9]/, '');
-    const htmlEle: HTMLHtmlElement | null = document.querySelector('html');
-    htmlEle && (htmlEle.className = 'html_' + htmlClass);
+    try {
+      // trying to use new API
+      window.scroll({
+        top: 0,
+        left: 0,
+        behavior: 'smooth',
+      });
+    } catch (error) {
+      // just a fallback for older browsers
+      window.scrollTo(0, 0);
+    }
+  }, [location.pathname]);
 
+  useEffect(() => {
     ScrollReveal().reveal('.js-appearing-card', {
       origin: 'bottom',
       distance: '18%',
@@ -62,6 +72,12 @@ const App = () => {
     });
   }, [location.pathname]);
 
+  useEffect(() => {
+    const htmlClass = location.pathname.substr(1).replace(/[0-9]/, '');
+    const htmlEle: HTMLHtmlElement | null = document.querySelector('html');
+    htmlEle && (htmlEle.className = 'html_' + htmlClass);
+  });
+
   const [curGradient, setCurGradient] = useState('');
   const [viewClickState, setViewClickState] = useState(ClickState.unClicked);
   const [cursorXY, setCursorXY] = useState([-1500, -1500]);
@@ -76,6 +92,7 @@ const App = () => {
     },
     { 'state-complete': viewClickState === ClickState.completed }
   );
+
   const handleCardClick = (x: number, y: number) => {
     setViewClickState(ClickState.clicked);
     setTimeout(() => {
@@ -90,24 +107,32 @@ const App = () => {
       <section className="main-container">
         <div className="grid-wrapper">
           <Switch>
-            <Route path="/svg-card1">
-              {gradientsData.map((info: GradientInfo) => (
-                <SVGCard info={info} key={info.class} />
-              ))}
-            </Route>
-            {/* <Route path="/svg-card2">
-            <div className="grid-wrapper grid demo2">
-              {gradientsData.map(info => <SVGCard info={info} key={info.class} initPath='M180,160C180,160,0,218,0,218C0,218,0,0,0,0C0,0,180,0,180,0C180,0,180,160,180,160' hoverPath='m 180,34.57627 -180,0 L 0,0 180,0 z' />)}
-            </div>
-          </Route>
-          <Route path="/svg-card3">
-            <div className="grid-wrapper grid demo2">
-              {gradientsData.map(info => <SVGCard info={info} key={info.class} initPath='M0,0C0,0,0,182,0,182C0,182,90,126.5,90,126.5C90,126.5,180,182,180,182C180,182,180,0,180,0C180,0,0,0,0,0C0,0,0,0,0,0' hoverPath='M 0,0 0,38 90,58 180.5,38 180,0 z' />)}
-            </div>
-          </Route> */}
+            {['arc', 'triangle', 'oblique'].map((type, i) => (
+              <Route path={`/svg-card${i + 1}`} key={type}>
+                {gradientsData.map((info: GradientInfo) => (
+                  <SVGCard
+                    type={type}
+                    info={info}
+                    key={info.class}
+                    onCardClick={(x: number, y: number) => {
+                      setCurGradient(info.class);
+                      handleCardClick(x, y);
+                    }}
+                  />
+                ))}
+              </Route>
+            ))}
+
             <Route path="/simple-card">
               {gradientsData.map((info: GradientInfo) => (
-                <SimCard info={info} key={info.class} />
+                <SimCard
+                  info={info}
+                  key={info.class}
+                  onCardClick={(x: number, y: number) => {
+                    setCurGradient(info.class);
+                    handleCardClick(x, y);
+                  }}
+                />
               ))}
             </Route>
             <Route path="/gra-card">
@@ -122,19 +147,14 @@ const App = () => {
                 />
               ))}
             </Route>
-            <Route path="/">
-              {gradientsData.map((info: GradientInfo) => (
-                <SVGCard info={info} key={info.class} />
-              ))}
-            </Route>
           </Switch>
         </div>
       </section>
       <Footer />
       <div
-        onClick={() => setViewClickState(ClickState.unClicked)}
         className={coverClass}
         style={{ left: cursorXY[0] + 'px', top: cursorXY[1] + 'px' }}
+        onClick={() => setViewClickState(ClickState.unClicked)}
       ></div>
     </div>
   );

@@ -1,13 +1,143 @@
 .svg-card {
   position: relative;
   height: 320px;
-  background-color: white;
   color: #333;
+  background-color: white;
   margin: 24px 12px;
-  box-shadow: 0 6px 15px rgba(36, 37, 38, 0.08);
-  border-radius: 16px;
+  border-radius: 8px;
   overflow: hidden;
-  transition: box-shadow 0.25s ease, transform 0.25s ease;
+
+  &:hover {
+    box-shadow: 5px 12px 20px rgba(36, 37, 38, 0.13);
+    img,
+    span {
+      opacity: 1;
+    }
+    h2,
+    p {
+      transform: translateY(16px);
+    }
+    p {
+      opacity: 0;
+      transition-delay: 0s;
+      transition-duration: 0.1s;
+    }
+    button {
+      opacity: 1;
+      transform: translateY(-50%) translateX(-50%) scale(1);
+    }
+    .label {
+      transform: translateY(0);
+    }
+  }
+
+  figure {
+    position: relative;
+    height: 100%;
+    margin: 0;
+    background: #333;
+
+    img,
+    span {
+      position: relative;
+      display: block;
+      width: 100%;
+      height: 100%;
+      opacity: 0.7;
+      transition: opacity 0.3s;
+    }
+
+    svg {
+      position: absolute;
+      top: -1px; /* fixes rendering issue in FF */
+      width: 100%;
+      height: 100%;
+      z-index: 10;
+      path {
+        fill: #fff;
+      }
+    }
+
+    figcaption {
+      position: absolute;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      z-index: 11;
+
+      h2 {
+        margin: 0;
+        color: #3498db;
+        font-size: 130%;
+        font-weight: 300;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        transition: transform 0.3s;
+      }
+      p {
+        padding: 0 20px;
+        color: #aaa;
+        font-weight: 300;
+        transition: opacity 0.3s, transform 0.3s;
+        transition-delay: 0.05s;
+      }
+      h2,
+      p {
+        transform: translateY(50px);
+      }
+
+      button {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translateY(-50%) translateX(-50%) scale(0.25);
+        border: 3px solid #fff;
+        padding: 4px 20px;
+        color: #fff;
+        font-weight: bold;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        background: transparent;
+        outline: none;
+        opacity: 0;
+        cursor: pointer;
+        transition: opacity 0.3s, transform 0.3s;
+      }
+
+      .label {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 44px;
+        line-height: 44px;
+        background-color: rgba(255, 255, 255, 0.8);
+        color: #333;
+        font-size: 0.8rem;
+        font-weight: 300;
+        text-transform: uppercase;
+        transform: translateY(44px);
+        transition: transform 0.3s ease-out;
+        cursor: pointer;
+
+        display: flex;
+        justify-content: space-around;
+        em {
+          display: inline-block;
+          width: 16px;
+          height: 16px;
+          border-radius: 50%;
+          margin-top: 12px;
+        }
+      }
+    }
+    figcaption,
+    h2,
+    p,
+    button {
+      backface-visibility: hidden;
+    }
+  }
 }
 
 @media (min-width: 1200px) {
@@ -35,191 +165,5 @@
     width: 100%;
     margin-left: 0;
     margin-right: 0;
-  }
-}
-.svg-card:hover {
-  box-shadow: 5px 12px 20px rgba(36, 37, 38, 0.13);
-}
-
-.svg-card figure {
-  position: relative;
-  height: 100%;
-  overflow: hidden;
-  margin: 0;
-  background: #333;
-}
-
-.svg-card figure img,
-.svg-card figure span {
-  position: relative;
-  display: block;
-  width: 100%;
-  height: 100%;
-  opacity: 0.7;
-  -webkit-transition: opacity 0.3s;
-  transition: opacity 0.3s;
-}
-/* Hover effects */
-.svg-card:hover figure img,
-.svg-card:hover figure span {
-  opacity: 1;
-}
-
-.svg-card figure button {
-  position: absolute;
-  padding: 4px 20px;
-  border: none;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  font-weight: bold;
-  -webkit-transition: opacity 0.3s, -webkit-transform 0.3s;
-  transition: opacity 0.3s, transform 0.3s;
-  top: 50%;
-  left: 50%;
-  border: 3px solid #fff;
-  background: transparent;
-  color: #fff;
-  opacity: 0;
-  -webkit-transform: translateY(-50%) translateX(-50%) scale(0.25);
-  transform: translateY(-50%) translateX(-50%) scale(0.25);
-  outline: none;
-  cursor: pointer;
-}
-.svg-card:hover figure button {
-  opacity: 1;
-  -webkit-transform: translateY(-50%) translateX(-50%) scale(1);
-  transform: translateY(-50%) translateX(-50%) scale(1);
-}
-/* .demo2.svg-card figure button {
-  bottom: 0;
-  left: 0;
-  padding: 15px;
-  width: 100%;
-  background: #fff;
-  color: #333;
-  font-weight: 300;
-  -webkit-transform: translateY(100%);
-  transform: translateY(100%);
-} */
-
-/* .demo2.svg-card:hover figure button {
-  -webkit-transition-timing-function: ease-out;
-  transition-timing-function: ease-out;
-  -webkit-transform: translateY(0);
-  transform: translateY(0);
-} */
-
-.svg-card figcaption {
-  position: absolute;
-  top: 0;
-  z-index: 11;
-  width: 100%;
-  height: 100%;
-  text-align: center;
-}
-
-.svg-card figcaption h2 {
-  margin: 0 0 20px 0;
-  color: #3498db;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  font-weight: 300;
-  font-size: 130%;
-  -webkit-transition: -webkit-transform 0.3s;
-  transition: transform 0.3s;
-}
-
-.svg-card figcaption p {
-  padding: 0 20px;
-  color: #aaa;
-  font-weight: 300;
-  -webkit-transition: opacity 0.3s, -webkit-transform 0.3s;
-  transition: opacity 0.3s, transform 0.3s;
-}
-
-.svg-card figcaption h2,
-.svg-card figcaption p {
-  -webkit-transform: translateY(50px);
-  transform: translateY(50px);
-}
-
-.svg-card figcaption,
-.svg-card figcaption h2,
-.svg-card figcaption p,
-.svg-card figure button {
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-}
-
-/* Style for SVG */
-.svg-card svg {
-  position: absolute;
-  top: -1px; /* fixes rendering issue in FF */
-  z-index: 10;
-  width: 100%;
-  height: 100%;
-}
-
-.svg-card svg path {
-  fill: #fff;
-}
-
-.svg-card:hover figcaption h2,
-.svg-card:hover figcaption p {
-  -webkit-transform: translateY(16px);
-  transform: translateY(16px);
-}
-
-.svg-card:hover figcaption p {
-  opacity: 0;
-}
-
-.svg-card figcaption h2 {
-  color: #e74c3c;
-}
-
-.svg-card figcaption p {
-  -webkit-transition-delay: 0.05s;
-  transition-delay: 0.05s;
-}
-
-.svg-card figcaption h2,
-.svg-card figcaption p {
-  -webkit-transition-timing-function: cubic-bezier(
-    0.25,
-    0.25,
-    0.115,
-    1
-  ); /* older webkit */
-  -webkit-transition-timing-function: cubic-bezier(0.25, 0.25, 0.115, 1.445);
-  timing-function: cubic-bezier(0.25, 0.25, 0.115, 1.445);
-}
-
-.svg-card:hover figcaption p {
-  -webkit-transition-delay: 0s;
-  transition-delay: 0s;
-  -webkit-transition-duration: 0.1s;
-  transition-duration: 0.1s;
-}
-
-.svg-card figcaption h2 {
-  color: #52be7f;
-}
-
-.demo-3 .svg-card:hover figcaption h2 {
-  -webkit-transform: translateY(5px);
-  transform: translateY(5px);
-}
-
-@media screen and (max-width: 45em) {
-  .svg-card figcaption h2 {
-    margin-bottom: 0px;
-    -webkit-transform: translateY(30px);
-    transform: translateY(30px);
-  }
-
-  .svg-card figcaption p {
-    margin: 0;
-    padding: 0 10px;
   }
 }

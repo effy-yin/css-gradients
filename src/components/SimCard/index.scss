@@ -1,0 +1,19 @@
+.simple-card {
+  width: 160px;
+  height: 160px;
+  background: #fff;
+  margin: 8px 4px;
+  border-radius: 8%;
+  &:hover {
+    box-shadow: 5px 12px 20px rgba(36, 37, 38, 0.13);
+  }
+  .dot {
+    display: block;
+    width: 64%;
+    height: 64%;
+    margin: 0 auto;
+    transform: translate(0, 28%);
+    border-radius: 50%;
+    cursor: pointer;
+  }
+}
