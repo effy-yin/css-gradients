@@ -17,3 +17,10 @@
     cursor: pointer;
   }
 }
+
+@media (max-width: 400px) {
+  .simple-card {
+    width: 144px;
+    height: 144px;
+  }
+}

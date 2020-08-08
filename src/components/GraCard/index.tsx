@@ -1,16 +1,15 @@
 import React, { useState } from 'react';
-import './index.scss';
 import classnames from 'classnames';
-import { GradientInfo, ClickState } from '../../App';
+import { GradientInfo, ClickState } from 'App';
+import './index.scss';
 
-const GraCard = ({
-  info,
-  onCardClick,
-}: {
+interface Props {
   info: GradientInfo;
-  onCardClick: Function;
-}) => {
-  const [copyClickState, setCopyClickState] = useState(ClickState.unClicked);
+  onCardClick?: (x: number, y: number) => void;
+}
+
+const GraCard = ({ info, onCardClick }: Props) => {
+  const [copyClickState, setCopyClickState] = useState(ClickState.NotClicked);
 
   const handleCopyClick: React.MouseEventHandler<HTMLButtonElement> = () => {
     const gradientCSS = getComputedStyle(
@@ -19,12 +18,12 @@ const GraCard = ({
     navigator.clipboard.writeText(gradientCSS).then(
       function () {
         /* clipboard successfully set */
-        setCopyClickState(ClickState.clicked);
+        setCopyClickState(ClickState.Clicked);
         setTimeout(() => {
-          setCopyClickState(ClickState.completed);
+          setCopyClickState(ClickState.Completed);
         }, 1500);
         setTimeout(() => {
-          setCopyClickState(ClickState.unClicked);
+          setCopyClickState(ClickState.NotClicked);
         }, 2000);
       },
       function () {
@@ -40,10 +39,10 @@ const GraCard = ({
     'js-appearing-card',
     {
       'state-done-message-visible':
-        copyClickState === ClickState.clicked ||
-        copyClickState === ClickState.completed,
+        copyClickState === ClickState.Clicked ||
+        copyClickState === ClickState.Completed,
     },
-    { 'state-done-message-gone': copyClickState === ClickState.completed }
+    { 'state-done-message-gone': copyClickState === ClickState.Completed }
   );
 
   return (
@@ -55,7 +54,9 @@ const GraCard = ({
         Copy Class
       </span>
       <div
-        onClick={(e) => onCardClick(e.clientX, e.clientY)}
+        onClick={(e) =>
+          onCardClick ? onCardClick(e.clientX, e.clientY) : null
+        }
         className={'gradient__background ' + info.class}
         title="View Fullscreen"
       ></div>

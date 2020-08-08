@@ -1,6 +1,5 @@
-@use "sass:map";
+@import 'assets/_variables.scss';
 
-@import '../../static/_variables.scss';
 .nav {
   position: fixed;
   z-index: 999;
@@ -9,71 +8,67 @@
   top: 0;
   border-bottom: 1px solid #ebebeb;
   background-color: rgba(255, 255, 255, 0.9);
-}
 
-.nav__container {
-  max-width: 1320px;
-  height: 87px;
-  margin: auto;
-  padding: 0 30px;
-  display: flex;
-  -ms-flex-align: center;
-  align-items: center;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-}
-
-@media (max-width: 576px) {
   .nav__container {
-    height: 50px;
-    -ms-flex-pack: center;
-    justify-content: center;
+    height: 87px;
+    margin: auto;
+    padding: 0 30px;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+
+    .nav__button {
+      margin-right: 15px;
+    }
+
+    .nav__button:last-child {
+      margin-right: 0;
+    }
   }
-}
 
-@media (max-width: 576px) {
-  .nav__logo_box {
-    width: 50px;
+  @media (max-width: map-get($grid-breakpoints, 'sm')) {
+    .nav__container {
+      height: 50px;
+      -ms-flex-pack: center;
+      justify-content: center;
+
+      .nav__buttons_box {
+        display: none;
+      }
+    }
   }
-}
-
-@media (max-width: 576px) {
-  .nav__buttons_box {
-    display: none;
-  }
-}
-
-.nav__button {
-  margin-right: 15px;
-}
-
-.nav__button:last-child {
-  margin-right: 0;
 }
 
 .button {
+  font-family: Montserrat, Helvetica, sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  color: #333435;
   display: inline-block;
-  min-width: 130px;
+  min-width: 120px;
   height: 42px;
   line-height: 36px;
   border-radius: 42px;
-  font-size: 10px;
-  letter-spacing: 0.065em;
-  text-transform: uppercase;
-  font-weight: 700;
-  font-family: Montserrat, Helvetica, sans-serif;
-  background-color: #f6f6f6;
-  border: 2px solid transparent;
-  cursor: pointer;
-  color: #333435;
   text-align: center;
+  text-transform: uppercase;
   text-decoration: none;
+  letter-spacing: 0.065em;
+  cursor: pointer;
   transition: background-color 0.25s ease-out, box-shadow 0.25s ease;
-}
-.button--blank,
-.button--blank:hover,
-.button--blank:focus {
-  background-color: transparent;
-  box-shadow: none;
-  color: #333435;
+
+  &.active {
+    color: #222;
+    font-weight: bolder;
+    background-color: #f6f6f6;
+  }
+  &:hover,
+  &:focus {
+    background-color: #f6f6f6;
+  }
+
+  @media (max-width: map-get($grid-breakpoints, 'md')) {
+    min-width: 100px;
+  }
 }

@@ -1,7 +1,7 @@
 import React from 'react';
-import './index.css';
-import logo from '../../static/logo.png';
-import Avatar from '../Avatar';
+import Avatar from 'components/Avatar';
+import logo from 'assets/logo.png';
+import './index.scss';
 
 export default function Footer() {
   return (
@@ -30,9 +30,7 @@ export default function Footer() {
                   title="Say hello in Twitter!"
                   target="_blank"
                   rel="noopener noreferrer"
-                >
-                  .
-                </a>
+                > </a>
               </li>
               <li className="social__item social__item--left_margin">
                 <a
@@ -63,9 +61,7 @@ export default function Footer() {
                   title="Say hello in Facebook!"
                   target="_blank"
                   rel="noopener noreferrer"
-                >
-                  .
-                </a>
+                > </a>
               </li>
               <li className="social__item social__item--left_margin">
                 <a
@@ -151,7 +147,7 @@ export default function Footer() {
               <li className="footer__menu__item">
                 <a
                   className="footer__menu__link"
-                  href="mailto:dodoroy@gmail.com?subject=Hello!"
+                  href="mailto:effy.yin@gmail.com?subject=!"
                   target="_blank"
                   rel="noopener noreferrer"
                 >

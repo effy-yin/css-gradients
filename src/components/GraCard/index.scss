@@ -1,3 +1,4 @@
+@import 'assets/_variables.scss';
 .card {
   position: relative;
   height: 420px;
@@ -9,18 +10,18 @@
   transition: box-shadow 0.25s ease, transform 0.25s ease;
 }
 
-@media (min-width: 1024px) {
+@media (min-width: map-get($grid-breakpoints, 'lg')) {
   .card {
     width: calc(33.33333% - 60px);
   }
 }
-@media (max-width: 1024px) {
+@media (max-width: map-get($grid-breakpoints, 'lg')) {
   .card {
     width: calc(50% - 40px);
   }
 }
 
-@media (max-width: 650px) {
+@media (max-width: map-get($grid-breakpoints, 'sm')) {
   .card {
     width: 100%;
     margin-left: 0;
@@ -86,8 +87,8 @@
   top: 0;
   margin: auto;
   border-radius: 50%;
-  height: 250px;
-  width: 250px;
+  height: 240px;
+  width: 240px;
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -95,16 +96,10 @@
     pointer;
 }
 
-@media (max-width: 992px) {
+@media (max-width: map-get($grid-breakpoints, 'lg')) {
   .gradient__background {
     height: 200px;
     width: 200px;
-  }
-}
-
-@media (max-width: 850px) {
-  .gradient__text_box {
-    margin-bottom: 20px;
   }
 }
 

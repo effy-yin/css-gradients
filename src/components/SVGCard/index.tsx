@@ -1,18 +1,16 @@
 import React, { useRef } from 'react';
 import pathData from './pathData.json';
-import './index.scss';
 import gsap from 'gsap';
-import { GradientInfo } from '../../App';
+import { GradientInfo } from 'App';
+import './index.scss';
 
-const SVGCard = ({
-  info,
-  onCardClick,
-  type,
-}: {
+interface Props {
   info: GradientInfo;
-  onCardClick: Function;
+  onCardClick?: (x: number, y: number) => void;
   type?: string;
-}) => {
+}
+
+const SVGCard = ({ info, onCardClick, type }: Props) => {
   const pathType: string = type ? type : 'arc';
   const { initPath, hoverPath } = (pathData as any)[pathType];
 
@@ -63,7 +61,6 @@ const SVGCard = ({
       className="svg-card js-appearing-card"
     >
       <figure>
-        {/* <img src={} alt="" /> */}
         <span ref={bgRef} className={info.class}></span>
         <svg viewBox="0 0 180 320" preserveAspectRatio="none">
           <path ref={pathRef} d={initPath} />
@@ -74,7 +71,11 @@ const SVGCard = ({
             {info.gradient[0].color}->
             {info.gradient[info.gradient.length - 1].color}
           </p>
-          <button onClick={(e) => onCardClick(e.clientX, e.clientY)}>
+          <button
+            onClick={(e) =>
+              onCardClick ? onCardClick(e.clientX, e.clientY) : null
+            }
+          >
             Click me
           </button>
           <div className="label" onClick={handleClick}>

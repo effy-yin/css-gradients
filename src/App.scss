@@ -1,6 +1,10 @@
+@import 'assets/_variables.scss';
+
 .main-container {
   background-color: #f6f6f6;
   margin-top: 87px;
+  overflow: hidden;
+  padding: 40px;
 }
 .html_simple-card .main-container {
   background: linear-gradient(
@@ -13,36 +17,24 @@
   );
 }
 
-@media (max-width: 576px) {
+@media screen and (max-width: map-get($grid-breakpoints, 'lg')) {
+  .main-container {
+    padding: 24px;
+  }
+}
+@media screen and (max-width: map-get($grid-breakpoints, 'sm')) {
   .main-container {
     margin-top: 50px;
+    padding: 12px 20px;
   }
 }
 
 .grid-wrapper {
   margin: 0 auto;
-  padding-top: 12px;
-  padding-bottom: 12px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-around;
-}
-
-@media screen and (max-width: 576px) {
-  .grid-wrapper {
-    padding: 16px;
-  }
-}
-@media screen and (max-width: 1024px) {
-  .grid-wrapper {
-    padding: 20px;
-  }
-}
-@media screen and (min-width: 1200px) {
-  .grid-wrapper {
-    padding: 60px;
-  }
 }
 
 .full_gradient {

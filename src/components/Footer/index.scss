@@ -1,3 +1,5 @@
+@import 'assets/_variables.scss';
+
 .footer__container {
   position: relative;
   max-width: 1320px;
@@ -229,7 +231,7 @@
   background-color: white;
 }
 
-@media (max-width: 992px) {
+@media (max-width: map-get($grid-breakpoints, 'lg')) {
   .footer__social_box {
     position: absolute;
     top: 0;
@@ -294,7 +296,7 @@
   color: inherit;
 }
 
-@media (max-width: 992px) {
+@media (max-width: map-get($grid-breakpoints, 'lg')) {
   .footer__logo_box {
     margin-bottom: 20px;
   }
@@ -314,7 +316,7 @@
   margin-bottom: 15px;
 }
 
-@media (min-width: 993px) {
+@media (min-width: map-get($grid-breakpoints, 'lg')) {
   .footer__menu__item:last-child {
     margin-bottom: 0;
   }
@@ -381,19 +383,19 @@
   clear: both;
 }
 
-@media (max-width: 500px) {
+@media (max-width: map-get($grid-breakpoints, 'sm')) {
   .footer__main_box {
     padding-bottom: 35px;
   }
 }
 
-@media (min-width: 993px) {
+@media (min-width: map-get($grid-breakpoints, 'lg')) {
   .footer__left_box {
     float: left;
   }
 }
 
-@media (max-width: 992px) {
+@media (max-width: map-get($grid-breakpoints, 'lg')) {
   .footer__left_box {
     margin-bottom: 40px;
   }
@@ -405,7 +407,7 @@
   margin-bottom: 60px;
 }
 
-@media (max-width: 992px) {
+@media (max-width: map-get($grid-breakpoints, 'lg')) {
   .footer__description--06 {
     margin-bottom: 20px;
   }
@@ -426,13 +428,13 @@
   margin-right: 0;
 }
 
-@media (max-width: 500px) {
+@media (max-width: map-get($grid-breakpoints, 'sm')) {
   .footer__menu--06:last-child {
     width: 100%;
   }
 }
 
-@media (max-width: 500px) {
+@media (max-width: map-get($grid-breakpoints, 'sm')) {
   .footer__menu--06 {
     float: left;
     width: 49%;
@@ -441,9 +443,14 @@
   }
 }
 
-@media (min-width: 993px) {
+@media (min-width: map-get($grid-breakpoints, 'lg')) {
   .footer__right_box {
     float: right;
+  }
+}
+@media (min-width: map-get($grid-breakpoints, 'sm')) and (max-width: map-get($grid-breakpoints, 'lg')) {
+  .footer__right_box {
+    display: flex;
   }
 }
 
@@ -501,7 +508,7 @@
   float: right;
 }
 
-@media (max-width: 992px) {
+@media (max-width: map-get($grid-breakpoints, 'lg')) {
   .footer__copyright--06 {
     float: left;
   }
@@ -547,10 +554,10 @@
   transition: filter 0.2s ease, opacity 0.2s 0.2s ease;
 }
 
-@media (max-width: 500px) {
+@media (max-width: map-get($grid-breakpoints, 'sm')) {
   .footer__input {
-    max-width: 100%;
-    width: 100%;
+    max-width: 90%;
+    width: 90%;
   }
 }
 

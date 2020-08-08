@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { Switch, Route, useLocation } from 'react-router-dom';
-import gradientsData from './static/gradients.json';
-import './static/gradients.css';
-import './App.scss';
+import { Switch, Route, useLocation, Redirect } from 'react-router-dom';
+import gradientsData from 'assets/gradients.json';
+import 'assets/gradients.css';
+import 'App.scss';
 
-import Header from './components/Header';
-import Footer from './components/Footer';
-import GraCard from './components/GraCard';
-import SimCard from './components/SimCard';
-import SVGCard from './components/SVGCard';
+import Header from 'components/Header';
+import Footer from 'components/Footer';
+import GraCard from 'components/GraCard';
+import SimCard from 'components/SimCard';
+import SVGCard from 'components/SVGCard';
+import ScrollTop from 'components/ScrollTop';
+import { Fab } from '@material-ui/core';
 import ScrollReveal from 'scrollreveal';
 import classnames from 'classnames';
 
@@ -22,9 +24,9 @@ export type GradientInfo = {
   gradient: { color: string; pos: number }[];
 };
 export enum ClickState {
-  unClicked = 'unClicked',
-  clicked = 'clicked',
-  completed = 'completed',
+  NotClicked,
+  Clicked,
+  Completed,
 }
 
 const App = () => {
@@ -39,6 +41,7 @@ const App = () => {
         behavior: 'smooth',
       });
     } catch (error) {
+      console.log(123);
       // just a fallback for older browsers
       window.scrollTo(0, 0);
     }
@@ -48,19 +51,19 @@ const App = () => {
     ScrollReveal().reveal('.js-appearing-card', {
       origin: 'bottom',
       distance: '18%',
-      duration: 800,
+      duration: 600,
       delay: 0,
       rotate: {
         x: 0,
         y: 0,
         z: 0,
       },
-      opacity: 0.1,
+      opacity: 0,
       scale: 0.99,
       easing: 'cubic-bezier(0.6, 0.2, 0.1, 1)',
       container: window.document.documentElement,
       mobile: !1,
-      reset: !1,
+      reset: false,
       useDelay: 'always',
       viewFactor: 0.2,
       viewOffset: {
@@ -79,7 +82,7 @@ const App = () => {
   });
 
   const [curGradient, setCurGradient] = useState('');
-  const [viewClickState, setViewClickState] = useState(ClickState.unClicked);
+  const [viewClickState, setViewClickState] = useState(ClickState.NotClicked);
   const [cursorXY, setCursorXY] = useState([-1500, -1500]);
 
   const coverClass = classnames(
@@ -87,16 +90,16 @@ const App = () => {
     'full_gradient',
     {
       'state-full':
-        viewClickState === ClickState.clicked ||
-        viewClickState === ClickState.completed,
+        viewClickState === ClickState.Clicked ||
+        viewClickState === ClickState.Completed,
     },
-    { 'state-complete': viewClickState === ClickState.completed }
+    { 'state-complete': viewClickState === ClickState.Completed }
   );
 
   const handleCardClick = (x: number, y: number) => {
-    setViewClickState(ClickState.clicked);
+    setViewClickState(ClickState.Clicked);
     setTimeout(() => {
-      setViewClickState(ClickState.completed);
+      setViewClickState(ClickState.Completed);
     }, 1000);
     setCursorXY([x - 1500, y - 1500]);
   };
@@ -105,15 +108,16 @@ const App = () => {
     <div className="App">
       <Header />
       <section className="main-container">
+        <div id="back-to-top-anchor" />
         <div className="grid-wrapper">
           <Switch>
             {['arc', 'triangle', 'oblique'].map((type, i) => (
               <Route path={`/svg-card${i + 1}`} key={type}>
                 {gradientsData.map((info: GradientInfo) => (
                   <SVGCard
+                    key={info.class}
                     type={type}
                     info={info}
-                    key={info.class}
                     onCardClick={(x: number, y: number) => {
                       setCurGradient(info.class);
                       handleCardClick(x, y);
@@ -126,8 +130,8 @@ const App = () => {
             <Route path="/simple-card">
               {gradientsData.map((info: GradientInfo) => (
                 <SimCard
-                  info={info}
                   key={info.class}
+                  info={info}
                   onCardClick={(x: number, y: number) => {
                     setCurGradient(info.class);
                     handleCardClick(x, y);
@@ -138,8 +142,8 @@ const App = () => {
             <Route path="/gra-card">
               {gradientsData.map((info: GradientInfo) => (
                 <GraCard
-                  info={info}
                   key={info.class}
+                  info={info}
                   onCardClick={(x: number, y: number) => {
                     setCurGradient(info.class);
                     handleCardClick(x, y);
@@ -147,6 +151,7 @@ const App = () => {
                 />
               ))}
             </Route>
+            <Redirect from="/" to="/gra-card" />
           </Switch>
         </div>
       </section>
@@ -154,8 +159,14 @@ const App = () => {
       <div
         className={coverClass}
         style={{ left: cursorXY[0] + 'px', top: cursorXY[1] + 'px' }}
-        onClick={() => setViewClickState(ClickState.unClicked)}
+        onClick={() => setViewClickState(ClickState.NotClicked)}
       ></div>
+
+      <ScrollTop>
+        <Fab color="secondary" size="small" aria-label="scroll back to top">
+          ⬆
+        </Fab>
+      </ScrollTop>
     </div>
   );
 };

@@ -1,9 +1,11 @@
+@import 'assets/_variables.scss';
+
 .svg-card {
   position: relative;
   height: 320px;
   color: #333;
   background-color: white;
-  margin: 24px 12px;
+  margin: 24px 0;
   border-radius: 8px;
   overflow: hidden;
 
@@ -140,27 +142,22 @@
   }
 }
 
-@media (min-width: 1200px) {
+@media (min-width: map-get($grid-breakpoints, 'xl')) {
   .svg-card {
-    width: calc(20% - 20px);
+    width: calc(25% - 24px);
   }
 }
-@media (min-width: 1024px) {
+@media (max-width: map-get($grid-breakpoints, 'lg')) {
   .svg-card {
-    width: calc(25% - 20px);
+    width: calc(33.3% - 24px);
   }
 }
-@media (max-width: 1024px) {
+@media (max-width: map-get($grid-breakpoints, 'md')) {
   .svg-card {
-    width: calc(30% - 20px);
+    width: calc(50% - 24px);
   }
 }
-@media (max-width: 800px) {
-  .svg-card {
-    width: calc(40% - 20px);
-  }
-}
-@media (max-width: 500px) {
+@media (max-width: map-get($grid-breakpoints, 'sm')) {
   .svg-card {
     width: 100%;
     margin-left: 0;

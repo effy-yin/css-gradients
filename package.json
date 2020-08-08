@@ -3,12 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@material-ui/core": "^4.11.0",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
     "@types/classnames": "^2.2.10",
     "@types/gsap": "^1.20.2",
     "@types/jest": "^24.9.1",
+    "@types/material-ui": "^0.21.7",
     "@types/node": "^12.12.37",
     "@types/react": "^16.9.34",
     "@types/react-dom": "^16.9.7",
@@ -22,7 +24,7 @@
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.1",
-    "scrollreveal": "^4.0.6",
+    "scrollreveal": "^4.0.7",
     "typescript": "^3.7.5"
   },
   "scripts": {
