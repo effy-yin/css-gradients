@@ -68,7 +68,8 @@ const SVGCard = ({ info, onCardClick, type }: Props) => {
         <figcaption>
           <h2>{info.name}</h2>
           <p>
-            {info.gradient[0].color}->
+            {info.gradient[0].color}
+            {' -> '}
             {info.gradient[info.gradient.length - 1].color}
           </p>
           <button
