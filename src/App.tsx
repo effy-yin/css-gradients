@@ -151,7 +151,7 @@ const App = () => {
                 />
               ))}
             </Route>
-            <Redirect from="/" to="/gra-card" />
+            <Redirect from="/" to="/svg-card1" />
           </Switch>
         </div>
       </section>
